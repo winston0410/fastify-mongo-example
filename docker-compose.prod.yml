@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: .
+      target: production
+    image: hugo/fastify:1.0
+    env_file: .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app
+    depends_on:
+      - pg
+  pg:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}

@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: .
+      target: development
+    image: hugo/fastify:1.0
+    env_file: .env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}

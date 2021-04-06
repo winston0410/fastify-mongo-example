@@ -1,0 +1,8 @@
+node_modules
+*.log
+Dockerfile
+.git
+.cache
+.gitignore
+*.md
+.DS_Store
